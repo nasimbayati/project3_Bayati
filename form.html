@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Submit User Info</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Create User</h2>
+
+    <form action="/users" method="POST">
+	  <fieldset>
+	    <legend>User Account Information</legend>
+        <label for="username">Username:</label>
+        <input id="username" 
+			   name="username" 
+			   type="text"
+			   required 
+			   minlength="3" 
+			   maxlength="32"
+			   pattern="^[A-Za-z0-9_]+$" 
+			   spellcheck="false"
+			   title= "Username can have 3-32 letters, numbers, or underscore"
+			   autocomplete="username" 
+			   placeholder="Your Username"/>
+
+        <label for="password">Password:</label>
+        <input id="password" 
+			   name="password" 
+			   type="password" 
+			   required 
+			   minlength="8" 
+			   maxlength="130" 
+			   title="Password must be at least 8 characters and include at least one letter and one number"
+			   pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}"
+			   autocomplete="new-password" 
+			   placeholder ="At least 8 characters, with letters and numbers" />
+	  </fieldset>
+	  <fieldset>
+	  <legend>User Personal Information</legend>
+        <label for="age">Age:</label>
+        <input id="age" 
+			   name="age" 
+			   type="number"
+			   required 
+			   min="1" 
+			   max="120" 
+			   step="1"
+			   title="Your age should be a valid number"
+			   inputmode="numeric" 
+			   placeholder="Your Age" />
+
+        <label for="email">Email:</label>
+        <input id="email" 
+			   name="email" 
+			   type="email"
+			   required 
+			   autocomplete="email" 
+			   inputmode="email" 
+			   placeholder="You@example.com" 
+			   autocapitalize="off"
+			   spellcheck="false" 
+			   pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+			   title="Enter a valid email like name@example.com"/>
+	  </fieldset>
+	  <fieldset>
+	  <legend>Optional Section: Message</legend>
+        <label for="message">Message (10 words or less):</label>
+        <textarea id="message" 
+				  name="message" 
+				  placeholder="Enter 10 words or less" 
+				  maxlength="200" ></textarea>
+	  </fieldset>
+      <button type="submit">Submit</button>
+      
+	</form>
+</div>
+
+<script>
+  const form = document.querySelector("form");
+  const message = document.getElementById("message");
+
+  form.addEventListener("submit", function (event) {
+    const text = message.value.trim();
+    const words = text === "" ? 0 : text.split(/\s+/).length;
+
+    if (words > 10) {
+      alert("Please keep the message to 10 words or less.");
+      event.preventDefault();
+    }
+  });
+</script>
+
+
+</body>
+</html>
