@@ -1,0 +1,19 @@
+Nasim Bayati
+
+Since the only three methods that can be used in HTML forms are: DIALOG, GET, and POST, the first thing I changed was the form method. It was originally using "DELETE", which browsers don’t actually support. When I tested it in DevTools, it sent a GET request instead and returned a 404 error. I replaced it with method="POST" so the form could send data correctly and safely.
+I think the original goal was to create a “Create User” form while the action goes to /inventory/search, so I change the action route to "/users".
+
+Next, after reading the css and html file, I discovered that the password field was hidden using CSS instead of being a real password input. (If client's browser’s autofill runs, it might automatically insert their saved password and submit it silently. That is how CSS + autofill can leak secrets without running any scripts.) I made it visible again by adding type="password" and deleting the class=hidden.password which referred to a function in css file which I also removed it too. In this way users can see a prope input. This also prevents confusion and improves security and usability.
+
+I added required, minlength, and pattern attributes to the username, password, email, and age fields. These rules will block not acceptable input, like empty fields or invalid email formats, before anything gets sent to the server. I also add placeholders, autocomplete hints, and min/max limits to make the form easier to use and safer.
+
+For the message field, I learned that HTML can’t count words by itself, it just prevents further typing if the input is longer than the maxlength. I searched online for the basic script that I could use for the message section. and added to the html file which limits users to ten words or less. It was one of the ways to control the number of words.
+
+One of the main security issues I noticed was the risk of XSS (cross-site scripting) if someone tried to submit code inside the message box. I learned that browsers won’t execute it immediately, but it will go to backend and backend must always sanitize and escape inputs before storing or displaying them.
+
+If this were a live production form, I would add HTTPS, password hashing, and server-side validation to fully make sure of what comes to the backend and  protect user data and prevent any potential attack.
+
+P.S: I had difficulty finding the right script code since I haven't had any JavaScript course at ACC. I tried to go over the material provided for this course, but I have used https://stackoverflow.com/ and https://www.geeksforgeeks.org/javascript/how-to-make-a-word-count-in-textarea-using-javascript/ and tried to study the codes and only use sections that I actually understood.
+
+I, Nasim Bayati, affirm that all work submitted in this case study is my own. I have not used AI tools, AI-generated text, or AI-based writing assistants (such as ChatGPT, Gemini, Grammarly AI, etc.) in the creation of this assignment. I understand that using AI tools for this project violates the spirit of ethical learning and may result in academic consequences.
+Signed: Nasim Bayati Date: 10/31/2025
